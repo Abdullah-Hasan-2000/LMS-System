@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import InputField from '../components/InputField/InputField.jsx';
 import AuthButton from '../components/AuthButton/AuthButton.jsx';
 import { Link, useNavigate } from 'react-router-dom';
+import { Bounce, toast } from 'react-toastify';
 
 const SignupScreen = () => {
 
@@ -15,20 +16,40 @@ const SignupScreen = () => {
     const navigate = useNavigate();
 
     const handleSignup = () => {
-        // Here you would typically call your authentication service
-        email && password ? createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                toast.success('Signup successful!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
                 console.log("Signup successful with email:", user.email);
                 navigate('/login');
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                toast.error( errorMessage , {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
                 console.error("Error during signup:", errorCode, errorMessage);
-            }) :
-            alert("Please enter your email and password.");
+            });
     };
 
     return (

@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Box, Paper } from '@mui/material';
-import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
 import InputField from '../components/InputField/InputField.jsx';
 import AuthButton from '../components/AuthButton/AuthButton.jsx';
-import SnackBar from '../components/SnackBar/SnackBar.jsx';
-
+import { Bounce, toast } from 'react-toastify';
 
 const LoginScreen = () => {
 
@@ -17,27 +15,40 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [snackbarState, setSnackbarState] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-
-
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        toast.success('Login successful!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
         console.log("Login successful with email:", user.email);
         navigate('/dashboard');
-        setSnackbarState(true);
-        setSnackbarMessage('Login successful!');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        toast.error(errorMessage, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
         console.error("Error during login:", errorCode, errorMessage);
-        // Show Snackbar with error message
-        setSnackbarState(true);
-        setSnackbarMessage(errorMessage);
 
       });
 
@@ -50,7 +61,7 @@ const LoginScreen = () => {
             Login Screen
           </Typography>
           <Typography variant="body2" sx={{ marginY: "15px" }}>
-            Welcome to the Bottle Management System...
+            Welcome to the Learning Management System...
             <br />Please login to continue.
           </Typography>
           <form onSubmit={(e) => {
@@ -69,7 +80,6 @@ const LoginScreen = () => {
         </Paper>
       </Box>
 
-      <SnackBar open={snackbarState} onclose={() => setSnackbarState(false)} message={snackbarMessage} />
     </>
   )
 }
