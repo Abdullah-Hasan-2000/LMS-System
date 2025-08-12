@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { auth } from '../config/firebase.jsx'
+import { auth , db } from '../config/firebase.jsx'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc } from 'firebase/firestore';
 import { Box, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import InputField from '../components/InputField/InputField.jsx';
@@ -20,6 +21,9 @@ const LoginScreen = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log("Login successful with email:", user.uid);
+
+        localStorage.setItem('userId', user.uid);
         toast.success('Login successful!', {
                     position: "top-right",
                     autoClose: 5000,
@@ -31,7 +35,7 @@ const LoginScreen = () => {
                     theme: "dark",
                     transition: Bounce,
                 });
-        console.log("Login successful with email:", user.email);
+        
         navigate('/dashboard');
       })
       .catch((error) => {

@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
+import SchoolIcon from '@mui/icons-material/School';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
@@ -44,7 +45,7 @@ function ResponsiveAppBar({ logoutButton }) {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <SchoolIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -60,52 +61,11 @@ function ResponsiveAppBar({ logoutButton }) {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        LEARNING MANAGEMENT SYSTEM
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{ display: { xs: 'block', md: 'none' } }}
-                        >
-
-                            <MenuItem onClick={() => navigate('/dashboard')}>
-                                <Typography sx={{ textAlign: 'center' }}>Dashboard</Typography>
-                            </MenuItem>
-
-                            <MenuItem onClick={() => navigate('/add-remove-item')}>
-                                <Typography sx={{ textAlign: 'center' }}>Add/Remove Item</Typography>
-                            </MenuItem>
-
-                            <MenuItem onClick={() => navigate('/sales')}>
-                                <Typography sx={{ textAlign: 'center' }}>Sales</Typography>
-                            </MenuItem>
-
-                        </Menu>
-                    </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    
+                    <SchoolIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -122,25 +82,13 @@ function ResponsiveAppBar({ logoutButton }) {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        LEARNING MANAGEMENT SYSTEM
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-                        <Button onClick={() => navigate('/dashboard')} sx={{ my: 2, color: 'white', display: 'block' }}>
-                            Dashboard
-                        </Button>
-                        <Button onClick={() => navigate('/add-remove-item')} sx={{ my: 2, color: 'white', display: 'block' }}>
-                            Add/Remove Item
-                        </Button>
-                        <Button onClick={() => navigate('/sales')} sx={{ my: 2, color: 'white', display: 'block' }}>
-                            Sales
-                        </Button>
-
-                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="3" /> {/* You can replace this with a user avatar or icon */}
                             </IconButton>
                         </Tooltip>
                         <Menu

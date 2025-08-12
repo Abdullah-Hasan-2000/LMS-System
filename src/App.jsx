@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import LoginScreen from './screens/LoginScreen.jsx'
 import SignupScreen from './screens/SignupScreen.jsx'
@@ -8,6 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { signOut } from "firebase/auth";
 import './App.css'
 import { ToastContainer, Bounce } from 'react-toastify'
+import AuthRoute from './Route/AuthRoute.jsx'
+import ProtectedRoute from './Route/ProtectedRoute.jsx'
+import StudentRegistrationScreen from './screens/StudentRegistrationScreen.jsx';
+import StudentListScreen from './screens/StudentListScreen.jsx';
+import TeacherRegistrationScreen from './screens/TeacherRegistrationScreen.jsx'
+import TeacherListScreen from './screens/TeacherListScreen.jsx'
 
 function App() {
 
@@ -16,7 +22,8 @@ function App() {
   const handleSignOut = () => {
     signOut(auth).then(() => {
       console.log("User signed out");
-      navigate('/login');
+      localStorage.removeItem('userId');
+      window.location.href = '/login';
     }).catch((error) => {
       console.error("Error signing out:", error);
     });
@@ -25,11 +32,22 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/signup" element={<SignupScreen />} />
-        <Route path="/dashboard" element={<Dashboard handleSignOut={handleSignOut} />} />
-        <Route path="/" element={<LoginScreen />} />
-        <Route path="*" element={<LoginScreen />} />
+        <Route element={<AuthRoute />}>
+          <Route path="/dashboard" element={<Dashboard handleSignOut={handleSignOut} />} />
+          <Route path="/" element={<Dashboard handleSignOut={handleSignOut}/>} />
+          <Route path="*" element={<Dashboard handleSignOut={handleSignOut} />} />
+          <Route path="/student-registration" element={<StudentRegistrationScreen handleSignOut={handleSignOut} />} />
+          <Route path="/student-list" element={<StudentListScreen handleSignOut={handleSignOut} />} />
+          <Route path="/teacher-registration" element={<TeacherRegistrationScreen handleSignOut={handleSignOut} />} />
+          <Route path="/teacher-list" element={<TeacherListScreen handleSignOut={handleSignOut} />} />
+
+        </Route>
+
+
+        <Route element={<ProtectedRoute/>}>
+          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/signup" element={<SignupScreen />} />
+        </Route>
       </Routes>
 
       <ToastContainer

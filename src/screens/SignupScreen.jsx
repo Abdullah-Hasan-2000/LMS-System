@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { auth } from '../config/firebase.jsx'
+import { auth,db } from '../config/firebase.jsx'
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import {doc, setDoc} from 'firebase/firestore';
 import { Box, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import InputField from '../components/InputField/InputField.jsx';
@@ -17,9 +18,16 @@ const SignupScreen = () => {
 
     const handleSignup = () => {
         createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(async(userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                console.log("Signup successful with email:", user.email);
+
+                await setDoc(doc(db, "users", user.uid), {
+                    email: user.email
+                });
+                console.log("User data saved to Firestore");
+
                 toast.success('Signup successful!', {
                     position: "top-right",
                     autoClose: 5000,
@@ -31,13 +39,13 @@ const SignupScreen = () => {
                     theme: "dark",
                     transition: Bounce,
                 });
-                console.log("Signup successful with email:", user.email);
+
                 navigate('/login');
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                toast.error( errorMessage , {
+                toast.error(errorMessage, {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,

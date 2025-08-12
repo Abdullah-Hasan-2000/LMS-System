@@ -4,10 +4,10 @@ import NavigationBar from '../components/NavigationBar/NavigationBar.jsx';
 import { Box, Paper } from '@mui/material';
 
 
-const Dashboard = ({ handleSignOut }) => {
+const StudentRegistrationScreen = ({ handleSignOut }) => {
   return (
     <>
-      <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%' }}>
         <ResponsiveAppBar logoutButton={handleSignOut} />
         <Box sx={{ display: 'flex', flexDirection: 'row', padding: 2 , paddingLeft: 6 }}>
           <div style={{ width: '400px', height: '100vh' }}>
@@ -15,8 +15,8 @@ const Dashboard = ({ handleSignOut }) => {
           </div>
           <Box sx={{ marginLeft: 2, width: '100%' }}>
             <Paper elevation={3} sx={{ paddingX: 2, paddingTop: 2, width: '95%', height: '100vh' }}>
-              <h1>Dashboard</h1>
-              <p>Welcome to the Dashboard!</p>
+              <h1>Student Registration</h1>
+              <p>Welcome to the Student Registration Page!</p>
             </Paper>
           </Box>
         </Box>
@@ -25,4 +25,4 @@ const Dashboard = ({ handleSignOut }) => {
   )
 }
 
-export default Dashboard
+export default StudentRegistrationScreen
