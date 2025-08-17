@@ -61,7 +61,7 @@ export default function NavigationBar() {
     {
       label: "Fees",
       icon: <CiMoneyBill style={{ width: '24px', height: '24px' }} />,
-      nested: [["Fees Structure", <IoMdAddCircleOutline style={{ width: '24px', height: '24px' }} />], ["Fees Voucher", <CiBoxList style={{ width: '24px', height: '24px' }} />]]
+      nested: [["Fees Structure", <IoMdAddCircleOutline style={{ width: '24px', height: '24px' }} />], ["Fees Submission", <IoMdAddCircleOutline style={{ width: '24px', height: '24px' }} />], ["Fees Voucher", <CiBoxList style={{ width: '24px', height: '24px' }} />]]
     },
     {
       label: "Admission",

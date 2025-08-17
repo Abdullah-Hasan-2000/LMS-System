@@ -50,7 +50,7 @@ function ResponsiveAppBar({ logoutButton }) {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        onClick={() => navigate('/')}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -59,6 +59,7 @@ function ResponsiveAppBar({ logoutButton }) {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
+                            cursor: 'pointer',
                         }}
                     >
                         LEARNING MANAGEMENT SYSTEM
